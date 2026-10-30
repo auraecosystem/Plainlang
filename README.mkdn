@@ -1,10 +1,12 @@
-# plainlanguage.gov
+# plainlanguage
+
 
 This is the public repo for [plainlanguage.gov](http://www.plainlanguage.gov), which is an online resource to help federal employees understand and comply with the Plain Writing Act of 2010. It represents a joint effort by the Plain Language Action and Information Network (PLAIN) and the General Services Administration Technology Transformation Services.
 
 ## About the site
 
-- This site uses [Jekyll](https://jekyllrb.com/docs/), a Ruby-based static site generator. For more information about using Jekyll and additional install instructions, refer to the [Jekyll documentation](http://jekyllrb.com/docs/home/).
+- This site uses 
+[Jekyll](https://jekyllrb.com/docs/), a Ruby-based static site generator. For more information about using Jekyll and additional install instructions, refer to the [Jekyll documentation](http://jekyllrb.com/docs/home/).
 
 - The site is built with the [U.S. Web Design Standards](https://standards.usa.gov), a set of reusable, high-quality components for modern websites. We're using the Web Design Standards [Jekyll theme](https://github.com/18F/uswds-jekyll) with some customized styles and [Font Awesome](http://fontawesome.io/license/) icons.
 
@@ -24,7 +26,7 @@ You will need to have the following installed on your machine before following t
 1. Install gem dependencies `bundle install`
 1. Install node dependencies `npm install`
 
-Notes for basic setup:
+#Notes for basic setup:
 
 - For basic setup, root or sudo-level access (e.g., `sudo gem install bundler jekyll`) may be required. Enter sudo password when prompted.
 - When running `npm install`, an `sha` key will be added to the kind-of dependency in the package-lock.json file. This can be committed to the forked repo but should not be merged with the parent repository. This key is unique to each user.
@@ -33,17 +35,20 @@ Notes for basic setup:
 
 To run the site locally, from the project folder, run:
 
-```
+```bash
 npm start
 ```
 
 If all goes well, visit the site at `http://localhost:4000`.
 
-Note that this method will rebuild the entire site every time you make a change to any file, however, the browser may need to be refreshed to see changes. If you want faster builds, you can use `bundle exec jekyll incrementalserve`, which comes with [some caveats](https://jekyllrb.com/docs/configuration/incremental-regeneration/), notably only changed files will be rebuilt. This means if you change a data file, HTML pages that use that data file won't be updated. Also, `bundle exec jekyll incrementalserve` may require an additional gem install.
+Note that this method will rebuild the entire site every time you make a change to any file, however, the browser may need to be refreshed to see changes. If you want faster builds, you can use `bundle exec jekyll incrementalserve`, 
+which comes with [some-caveats](https://jekyllrb.com/docs/configuration/incremental-regeneration/),
+notably only changed files will be rebuilt. This means if you change a data file, HTML pages that use that data file won't be updated. Also, `bundle exec jekyll incrementalserve` may require an additional gem install.
 
 ## Accessibility tests
 
-We follow the WCAG2AA standard, and one of the ways we check that we're following the right rules is through automated tools, like [**pa11y**](https://github.com/pa11y/pa11y/). For more info on the rules being tested checkout the [pa11y wiki](https://github.com/pa11y/pa11y/wiki/HTML-CodeSniffer-Rules).
+We follow the WCAG2AA standard, and one of the ways we check that we're following the right rules is through automated tools, like
+[**pa11y**](https://github.com/pa11y/pa11y/). For more info on the rules being tested checkout the [pa11y wiki](https://github.com/pa11y/pa11y/wiki/HTML-CodeSniffer-Rules).
 
 ### Running tests
 
