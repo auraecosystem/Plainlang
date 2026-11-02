@@ -1,0 +1,7 @@
+# A first Plainlang program.
+function greet(name) {
+    return "Hello, " + name
+}
+
+let message = greet("Plainlang")
+print(message)
