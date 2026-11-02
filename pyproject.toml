@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plainlang"
+version = "0.1.0.dev0"
+description = "An experimental human-readable programming language and interpreter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "See repository LICENSE.md; licensing scope is under review." }
+authors = [{ name = "Plainlang Contributors" }]
+dependencies = []
+
+[project.scripts]
+plainlang = "plainlang.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
