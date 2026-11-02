@@ -1,0 +1,18 @@
+(* Plainlang 0.1 bootstrap grammar. Newlines and semicolons separate statements. *)
+program          = { separator }, { declaration, { separator } } ;
+declaration      = function-declaration | let-declaration | statement ;
+function-declaration = ( "function" | "fn" ), identifier, "(", [ identifier, { ",", identifier } ], ")", "{", { separator }, { declaration, { separator } }, "}" ;
+let-declaration  = "let", identifier, "=", expression ;
+statement        = "return", [ expression ] | expression ;
+expression       = equality ;
+equality         = comparison, { ( "==" | "!=" ), comparison } ;
+comparison       = term, { ( ">" | ">=" | "<" | "<=" ), term } ;
+term             = factor, { ( "+" | "-" ), factor } ;
+factor           = unary, { ( "*" | "/" | "%" ), unary } ;
+unary            = [ "-" ], call ;
+call             = primary, { "(", [ expression, { ",", expression } ], ")" } ;
+primary          = number | string | "true" | "false" | "none" | identifier | "(", expression, ")" ;
+identifier       = letter, { letter | digit | "_" } ;
+number           = digit, { digit }, [ ".", digit, { digit } ] ;
+string           = double-quoted-string | single-quoted-string ;
+separator        = newline | ";" ;
