@@ -1,0 +1,45 @@
+name: Plainlang bootstrap
+
+on:
+  push:
+    paths:
+      - "src/plainlang/**"
+      - "tests/**"
+      - "examples/**"
+      - "pyproject.toml"
+      - ".github/workflows/plainlang.yml"
+  pull_request:
+    paths:
+      - "src/plainlang/**"
+      - "tests/**"
+      - "examples/**"
+      - "pyproject.toml"
+      - ".github/workflows/plainlang.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run unit tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v
+      - name: Check example
+        env:
+          PYTHONPATH: src
+        run: python -m plainlang check examples/hello.pln
+      - name: Run example
+        env:
+          PYTHONPATH: src
+        run: python -m plainlang run examples/hello.pln
