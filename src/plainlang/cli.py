@@ -20,7 +20,7 @@ def main(argv: list[str] | None = None) -> int:
         source = args.source.read_text(encoding="utf-8")
         if args.command == "tokens":
             for token in tokenize(source):
-                print(f"{token.line}:{token.column}\\t{token.kind}\\t{token.value}")
+                print(f"{token.line}:{token.column}\t{token.kind}\t{token.value}")
         elif args.command == "check":
             parse(source)
             print(f"OK: {args.source} parsed successfully")
