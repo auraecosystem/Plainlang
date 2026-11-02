@@ -53,6 +53,15 @@ class RuntimeTests(unittest.TestCase):
         with self.assertRaises(PlainlangRuntimeError):
             execute("function one(x) { return x }\none()")
 
+    def test_function_closure_sees_later_global_bindings(self):
+        output = []
+        execute('function read() { return later }\nlet later = "available"\nprint(read())', output=lambda *v: output.append(v[0]))
+        self.assertEqual(output, ["available"])
+
+    def test_return_outside_function_is_reported(self):
+        with self.assertRaises(PlainlangRuntimeError):
+            execute("return 1")
+
 
 if __name__ == "__main__":
     unittest.main()
