@@ -31,9 +31,12 @@ class Interpreter:
 
     def run(self, program: Program):
         result = None
-        for statement in program.statements:
-            result = self._execute(statement)
-        return result
+        try:
+            for statement in program.statements:
+                result = self._execute(statement)
+            return result
+        except _ReturnSignal as signal:
+            raise PlainlangRuntimeError("return used outside a function") from signal
 
     def _execute(self, node):
         if isinstance(node, Let):
@@ -44,7 +47,7 @@ class Interpreter:
         if isinstance(node, Function):
             if node.name in self.environment:
                 raise PlainlangRuntimeError(f"Name already defined: {node.name}")
-            self.environment[node.name] = UserFunction(node, self.environment.copy())
+            self.environment[node.name] = UserFunction(node, self.environment)
             return None
         if isinstance(node, Return):
             raise _ReturnSignal(None if node.value is None else self._evaluate(node.value))
