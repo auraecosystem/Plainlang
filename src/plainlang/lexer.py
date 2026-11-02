@@ -14,9 +14,9 @@ class Token:
 
 
 _TOKEN_RE = re.compile(
-    r"(?P<SPACE>[ \\t\\r]+)|(?P<NEWLINE>\\n)|(?P<COMMENT>\\#[^\\n]*)|"
-    r'(?P<STRING>"(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\')|'
-    r"(?P<NUMBER>\\d+(?:\\.\\d+)?)|(?P<IDENT>[A-Za-z_][A-Za-z0-9_]*)|"
+    r"(?P<SPACE>[ \t\r]+)|(?P<NEWLINE>\n)|(?P<COMMENT>\#[^\n]*)|"
+    r'(?P<STRING>"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\')|'
+    r"(?P<NUMBER>\d+(?:\.\d+)?)|(?P<IDENT>[A-Za-z_][A-Za-z0-9_]*)|"
     r"(?P<OP>->|==|!=|<=|>=|[+*/%=<>-])|(?P<PUNCT>[(){},;])"
 )
 
@@ -38,10 +38,10 @@ def tokenize(source: str) -> list[Token]:
         value = match.group()
         if kind not in {"SPACE", "COMMENT"}:
             tokens.append(Token(kind, value, line, column))
-        newlines = value.count("\\n")
+        newlines = value.count("\n")
         if newlines:
             line += newlines
-            column = len(value.rsplit("\\n", 1)[-1]) + 1
+            column = len(value.rsplit("\n", 1)[-1]) + 1
         else:
             column += len(value)
         position = match.end()
